@@ -48,12 +48,6 @@ const navigate = useNavigate();
       justify-center gap-8 sm:justify-evenly max-sm:flex-col
       backdrop-blur-2xl"
     >
-      {/* Left */}
-      <img
-        src="/message.png"
-        alt="Logo"
-        className="w-[min(30vw,250px)]"
-      />
 
       {/* Right */}
       <form
