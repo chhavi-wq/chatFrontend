@@ -44,7 +44,7 @@ const [showMenu, setShowMenu] = useState(false);
           <img
             src="/message.png"
             alt="logo"
-            className="max-w-20"
+            className="max-w-5"
           />
 
           {/* Menu */}
