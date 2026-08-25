@@ -41,7 +41,7 @@ const [showMenu, setShowMenu] = useState(false);
       <div className="pb-5">
         {/* Header */}
         <div className="flex justify-between items-center">
-          <div className="flex flex-row">
+          <div className="flex items-center text-center flex-row">
           <img
             src={"/message.png"}
             alt="logo"
@@ -148,7 +148,7 @@ const [showMenu, setShowMenu] = useState(false);
                   Online
                 </span>
               ) : (
-                <span className="text-neutral-400 text-xs">
+                <span className="text-neutral-200 text-xs">
                   Offline
                 </span>
               )}
