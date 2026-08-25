@@ -41,7 +41,7 @@ const [showMenu, setShowMenu] = useState(false);
       <div className="pb-5">
         {/* Header */}
         <div className="flex justify-between items-center">
-          <div>
+          <div className="flex flex-row">
           <img
             src={"/message.png"}
             alt="logo"
