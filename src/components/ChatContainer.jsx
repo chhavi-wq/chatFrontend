@@ -76,7 +76,6 @@ const ChatContainer = () => {
     {/* Header */}
     <div
       className="
-        h-[70px]
         flex
         items-center
         gap-3
@@ -191,17 +190,17 @@ const ChatContainer = () => {
 
     {/* Chat Area */}
     <div
-      className="
-        flex
-        flex-col
-        h-[calc(100%-135px)]
-        overflow-y-auto
-        p-4
-        sm:p-5
-        pb-8
-        gap-1
-      "
-    >
+  className="
+    flex
+    flex-col
+    h-[calc(100%-120px)]
+    overflow-y-auto
+    p-4
+    pb-6
+    gap-1
+  "
+>
+    
       {messages.map((mess, idx) => {
         const isOwnMessage =
           mess.senderId?.toString() ===
