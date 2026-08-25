@@ -47,92 +47,305 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cover bg-no-repeat flex items-center justify-center">
-      <div
-        className="w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2 border-gray-600
-        flex items-center justify-between max-sm:flex-col-reverse rounded-lg"
+  <div
+    className="
+      min-h-screen
+      flex
+      items-center
+      justify-center
+      px-4
+      py-10
+      bg-[#06152e]
+      bg-cover
+      bg-center
+      relative
+      overflow-hidden
+    "
+    style={{
+      backgroundImage: `url(${assets.login_bg})`,
+    }}
+  >
+    {/* Dark overlay */}
+    <div className="absolute inset-0 bg-[#020b1c]/70 backdrop-blur-[3px]" />
+
+    {/* Blue glow - top left */}
+    <div
+      className="
+        absolute
+        -top-32
+        -left-32
+        w-96
+        h-96
+        rounded-full
+        bg-blue-600/20
+        blur-3xl
+      "
+    />
+
+    {/* Blue glow - bottom right */}
+    <div
+      className="
+        absolute
+        -bottom-32
+        -right-32
+        w-96
+        h-96
+        rounded-full
+        bg-cyan-500/10
+        blur-3xl
+      "
+    />
+
+    {/* Main Card */}
+    <div
+      className="
+        relative
+        z-10
+        w-full
+        max-w-3xl
+        flex
+        items-center
+        justify-between
+        gap-10
+        p-8
+        sm:p-10
+        max-sm:flex-col-reverse
+        rounded-3xl
+        border
+        border-white/20
+        bg-white/10
+        backdrop-blur-2xl
+        shadow-2xl
+        shadow-black/40
+      "
+    >
+      {/* Form */}
+      <form
+        onSubmit={handleSubmit}
+        className="
+          flex
+          flex-col
+          gap-5
+          flex-1
+          w-full
+        "
       >
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-5 p-10 flex-1"
-        >
-          <h3 className="text-lg">
+        {/* Heading */}
+        <div className="mb-2">
+          <h3 className="text-2xl font-semibold text-white">
             Profile Details
           </h3>
 
-          {/* Profile Image Upload */}
-          <label
-            htmlFor="avatar"
-            className="flex items-center gap-3 cursor-pointer"
-          >
-            <input
-              onChange={(e) =>
-                setSelectedImage(e.target.files[0])
-              }
-              type="file"
-              id="avatar"
-              accept=".png, .jpg, .jpeg"
-              hidden
-            />
+          <p className="text-sm text-blue-100/50 mt-1">
+            Update your profile information
+          </p>
+        </div>
 
+        {/* Profile Image Upload */}
+        <label
+          htmlFor="avatar"
+          className="
+            flex
+            items-center
+            gap-4
+            cursor-pointer
+            group
+            w-fit
+          "
+        >
+          <input
+            onChange={(e) =>
+              setSelectedImage(e.target.files[0])
+            }
+            type="file"
+            id="avatar"
+            accept=".png, .jpg, .jpeg"
+            hidden
+          />
+
+          {/* Small profile image */}
+          <div
+            className="
+              w-14
+              h-14
+              rounded-full
+              p-[2px]
+              bg-gradient-to-br
+              from-blue-400
+              to-blue-700
+              shrink-0
+            "
+          >
             <img
               src={
                 selectedImage
                   ? URL.createObjectURL(selectedImage)
                   : authUser?.profilePic || assets.avatar_icon
               }
-              alt="icon"
-              className="w-12 h-12 rounded-full"
+              alt="Profile"
+              className="
+                w-full
+                h-full
+                rounded-full
+                object-cover
+                border-2
+                border-[#071832]
+              "
             />
+          </div>
 
-            Upload profile image
+          <div>
+            <p className="text-sm font-medium text-white">
+              Upload profile image
+            </p>
+
+            <p className="text-xs text-blue-100/40 mt-1">
+              PNG, JPG or JPEG
+            </p>
+          </div>
+        </label>
+
+        {/* Name */}
+        <div className="flex flex-col gap-2">
+          <label className="text-sm text-blue-100/80">
+            Your Name
           </label>
 
-          {/* Name */}
           <input
             onChange={(e) => setName(e.target.value)}
             value={name}
             type="text"
-            placeholder="Your Name"
+            placeholder="Enter your name"
             required
-            className="p-2 border border-gray-500 rounded-md
-            focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="
+              w-full
+              px-4
+              py-3
+              rounded-xl
+              border
+              border-white/15
+              bg-white/10
+              text-white
+              placeholder:text-blue-100/40
+              outline-none
+              transition-all
+              duration-200
+              focus:border-blue-400
+              focus:ring-2
+              focus:ring-blue-500/30
+              focus:bg-white/15
+            "
           />
+        </div>
 
-          {/* Bio */}
+        {/* Bio */}
+        <div className="flex flex-col gap-2">
+          <label className="text-sm text-blue-100/80">
+            About You
+          </label>
+
           <textarea
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="p-2 border border-gray-500 rounded-md
-            focus:outline-none focus:ring-2 focus:ring-violet-500"
             required
             rows={4}
             placeholder="Write a short bio..."
+            className="
+              w-full
+              px-4
+              py-3
+              rounded-xl
+              border
+              border-white/15
+              bg-white/10
+              text-white
+              placeholder:text-blue-100/40
+              outline-none
+              resize-none
+              transition-all
+              duration-200
+              focus:border-blue-400
+              focus:ring-2
+              focus:ring-blue-500/30
+              focus:bg-white/15
+            "
           />
+        </div>
 
-          {/* Save */}
-          <button
-            className="bg-gradient-to-r from-purple-400 to-violet-600
-            text-white p-2 rounded-full text-lg cursor-pointer"
-            type="submit"
-          >
-            Save
-          </button>
-        </form>
+        {/* Save Button */}
+        <button
+          className="
+            w-full
+            mt-2
+            py-3
+            rounded-xl
+            text-white
+            font-semibold
+            bg-gradient-to-r
+            from-blue-600
+            via-blue-700
+            to-blue-800
+            shadow-lg
+            shadow-blue-900/40
+            hover:from-blue-500
+            hover:via-blue-600
+            hover:to-blue-700
+            hover:shadow-blue-500/30
+            hover:-translate-y-0.5
+            active:translate-y-0
+            transition-all
+            duration-200
+            cursor-pointer
+          "
+          type="submit"
+        >
+          Save Changes
+        </button>
+      </form>
 
-        {/* Large Profile Image */}
-        <img
-          src={
-            selectedImage
-              ? URL.createObjectURL(selectedImage)
-              : authUser?.profilePic || assets.logo_icon
-          }
-          className="max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10"
-          alt="Profile"
-        />
+      {/* Large Profile Image */}
+      <div className="flex flex-col items-center gap-4 shrink-0">
+        <div
+          className="
+            w-44
+            h-44
+            sm:w-52
+            sm:h-52
+            rounded-full
+            p-[3px]
+            bg-gradient-to-br
+            from-blue-400
+            via-blue-600
+            to-cyan-500
+            shadow-2xl
+            shadow-blue-900/40
+          "
+        >
+          <img
+            src={
+              selectedImage
+                ? URL.createObjectURL(selectedImage)
+                : authUser?.profilePic || assets.logo_icon
+            }
+            className="
+              w-full
+              h-full
+              rounded-full
+              object-cover
+              border-4
+              border-[#071832]
+            "
+            alt="Profile"
+          />
+        </div>
+
+        <p className="text-sm text-blue-100/50">
+          Profile Preview
+        </p>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default ProfilePage;

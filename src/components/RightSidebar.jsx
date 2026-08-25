@@ -22,78 +22,225 @@ const RightSidebar = () => {
   }, [messages]);
 
   return (
-    selectedUser && (
-      <div
-        className={`bg-[#8185B2]/10 text-white w-full relative overflow-scroll ${
-          selectedUser ? "max-md:hidden" : ""
-        }`}
-      >
-        {/* User information */}
-        <div className="pt-16 flex flex-col items-center gap-2 text-xs font-light">
-          {/* Profile picture */}
+  selectedUser && (
+    <div
+      className={`
+        relative
+        w-full
+        h-full
+        overflow-y-auto
+        text-white
+        bg-[#071832]/70
+        border-l
+        border-white/10
+        ${selectedUser ? "max-md:hidden" : ""}
+      `}
+    >
+      {/* User Information */}
+      <div className="pt-12 px-5 flex flex-col items-center text-center">
+
+        {/* Profile Picture */}
+        <div
+          className="
+            w-24
+            h-24
+            rounded-full
+            p-[3px]
+            bg-gradient-to-br
+            from-blue-400
+            via-blue-600
+            to-cyan-500
+            shadow-xl
+            shadow-blue-900/40
+          "
+        >
           <img
             src={
-              selectedUser?.profilePic || assets.avatar_icon
+              selectedUser?.profilePic ||
+              assets.avatar_icon
             }
-            alt=""
-            className="w-20 aspect-square rounded-full"
+            alt="Profile"
+            className="
+              w-full
+              h-full
+              rounded-full
+              object-cover
+              border-4
+              border-[#071832]
+            "
           />
-
-          {/* Name + Online status */}
-          <h1 className="px-10 text-xl font-medium mx-auto flex items-center gap-2">
-            {onlineUsers.includes(selectedUser._id) && (
-              <p className="w-2 h-2 rounded-full bg-green-500"></p>
-            )}
-
-            {selectedUser.fullName}
-          </h1>
-
-          {/* Bio */}
-          <p className="px-5 mx-auto">
-            {selectedUser.bio}
-          </p>
         </div>
 
-        <hr className="border-[#ffffff50] my-4" />
+        {/* Name + Online Status */}
+        <h1
+          className="
+            mt-4
+            text-xl
+            font-semibold
+            flex
+            items-center
+            gap-2
+          "
+        >
+          {selectedUser.fullName}
 
-        {/* Media */}
-        <div className="px-5 text-xs">
-          <p>Media</p>
+          {onlineUsers.includes(selectedUser._id) && (
+            <span
+              className="
+                w-2.5
+                h-2.5
+                rounded-full
+                bg-blue-400
+                shadow
+                shadow-blue-400/70
+              "
+            />
+          )}
+        </h1>
 
+        {/* Online / Offline */}
+        <p className="text-xs mt-1">
+          {onlineUsers.includes(selectedUser._id) ? (
+            <span className="text-blue-400">
+              Online
+            </span>
+          ) : (
+            <span className="text-blue-100/40">
+              Offline
+            </span>
+          )}
+        </p>
+
+        {/* Bio */}
+        <p
+          className="
+            mt-3
+            max-w-[280px]
+            text-sm
+            leading-5
+            text-blue-100/60
+          "
+        >
+          {selectedUser.bio || "No bio available"}
+        </p>
+      </div>
+
+      {/* Divider */}
+      <div className="mx-5 my-6 h-px bg-white/10" />
+
+      {/* Media */}
+      <div className="px-5 pb-24">
+
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-medium text-white">
+            Media
+          </p>
+
+          <span className="text-xs text-blue-100/40">
+            {msgImages.length} files
+          </span>
+        </div>
+
+        {/* Media Grid */}
+        {msgImages.length > 0 ? (
           <div
-            className="mt-2 max-h-[200px] overflow-y-scroll
-            grid grid-cols-2 gap-4 opacity-80"
+            className="
+              mt-4
+              max-h-[240px]
+              overflow-y-auto
+              grid
+              grid-cols-2
+              gap-3
+              pr-1
+            "
           >
             {msgImages.map((url, idx) => (
               <div
                 key={idx}
                 onClick={() => window.open(url)}
-                className="cursor-pointer rounded"
+                className="
+                  group
+                  cursor-pointer
+                  rounded-xl
+                  overflow-hidden
+                  border
+                  border-white/10
+                  bg-white/5
+                  hover:border-blue-400/40
+                  transition-all
+                "
               >
                 <img
                   src={url}
-                  alt=""
-                  className="w-full rounded-md"
+                  alt="Shared media"
+                  className="
+                    w-full
+                    aspect-square
+                    object-cover
+                    opacity-80
+                    group-hover:opacity-100
+                    group-hover:scale-105
+                    transition-all
+                    duration-300
+                  "
                 />
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Logout */}
-        <button
-          onClick={() => logout()}
-          className="absolute bottom-5 left-1/2
-          transform -translate-x-1/2
-          bg-gradient-to-r from-purple-400 to-violet-600
-          text-white border-none text-sm font-light
-          py-2 px-20 rounded-full cursor-pointer"
-        >
-          Logout
-        </button>
+        ) : (
+          <div
+            className="
+              mt-4
+              py-8
+              rounded-xl
+              border
+              border-dashed
+              border-white/10
+              bg-white/5
+              text-center
+            "
+          >
+            <p className="text-xs text-blue-100/40">
+              No shared media yet
+            </p>
+          </div>
+        )}
       </div>
-    )
-  );
+
+      {/* Logout */}
+      <button
+        onClick={() => logout()}
+        className="
+          absolute
+          bottom-5
+          left-1/2
+          -translate-x-1/2
+          w-[80%]
+          py-2.5
+          rounded-xl
+          bg-gradient-to-r
+          from-blue-600
+          to-blue-800
+          text-white
+          text-sm
+          font-medium
+          shadow-lg
+          shadow-blue-900/30
+          hover:from-blue-500
+          hover:to-blue-700
+          hover:shadow-blue-500/20
+          hover:-translate-y-0.5
+          active:translate-y-0
+          transition-all
+          duration-200
+          cursor-pointer
+        "
+      >
+        Logout
+      </button>
+    </div>
+  )
+);
 };
 
 export default RightSidebar;
