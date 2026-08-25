@@ -193,7 +193,6 @@ const ChatContainer = () => {
   className="
     flex
     flex-col
-    h-[calc(100%-120px)]
     overflow-y-auto
     p-4
     pb-6
