@@ -223,7 +223,7 @@ const ChatContainer = () => {
 
             <img
                 src="/message.png"
-                className="max-w-16"
+                className="max-w-26"
                 alt=""
             />
 
