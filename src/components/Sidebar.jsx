@@ -42,9 +42,9 @@ const [showMenu, setShowMenu] = useState(false);
         {/* Header */}
         <div className="flex justify-between items-center">
           <img
-            src="/message.png"
+            src={assets.logo}
             alt="logo"
-            className="max-w-5"
+            className="max-w-40"
           />
 
           {/* Menu */}
