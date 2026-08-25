@@ -71,7 +71,7 @@ const ChatContainer = () => {
     }, [messages]);
 
    return selectedUser ? (
-    <div className="h-full overflow-y-scroll relative bg-[#0f0f14] backdrop-blur-lg">
+    <div className="h-full overflow-y-scroll relative bg-[#06152e] backdrop-blur-lg">
 
         {/* Header */}
         <div className="flex items-center gap-3 py-4 px-5 border-b border-white/10 bg-[#13131a]/80">
