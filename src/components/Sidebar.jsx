@@ -41,12 +41,14 @@ const [showMenu, setShowMenu] = useState(false);
       <div className="pb-5">
         {/* Header */}
         <div className="flex justify-between items-center">
+          <div>
           <img
             src={"/message.png"}
             alt="logo"
             className="max-w-20"
           />
-<h1>Chat App</h1>
+<h1 className="font-bold">Chat App</h1>
+</div>
           {/* Menu */}
         <div className="py-2 relative">
   <img
