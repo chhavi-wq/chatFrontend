@@ -50,7 +50,7 @@ const navigate = useNavigate();
     >
       {/* Left */}
       <img
-        src={assets.logo_big}
+        src="/message.png"
         alt="Logo"
         className="w-[min(30vw,250px)]"
       />

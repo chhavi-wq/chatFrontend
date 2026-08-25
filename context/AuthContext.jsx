@@ -22,9 +22,8 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.get("/api/auth/check");
 
       if (data.success) {
-        setAuthUser(data.user);
-        connectSocket(data.user);
-      }
+  setAuthUser(data.user);
+}
     } catch (error) {
       console.log(
         "Check auth error:",
@@ -36,30 +35,6 @@ export const AuthProvider = ({ children }) => {
       setToken(null);
       setAuthUser(null);
     }
-  };
-
-  // ================= SOCKET =================
-
-  const connectSocket = (userData) => {
-    if (!userData) return;
-
-    if (socket?.connected) return;
-
-    const newSocket = io(backendUrl, {
-      query: {
-        userId: userData._id,
-      },
-    });
-
-    newSocket.on("connect", () => {
-      console.log("Socket connected:", newSocket.id);
-    });
-
-    newSocket.on("getOnlineUsers", (userIds) => {
-      setOnlineUsers(userIds);
-    });
-
-    setSocket(newSocket);
   };
 
   // ================= LOGIN / SIGNUP =================
@@ -90,7 +65,7 @@ export const AuthProvider = ({ children }) => {
         `Bearer ${data.token}`;
 
       // Connect socket
-      connectSocket(data.userData);
+     
 
       toast.success(data.message);
 
@@ -162,6 +137,41 @@ export const AuthProvider = ({ children }) => {
       checkAuth();
     }
   }, [token]);
+
+  // ================= SOCKET =================
+
+useEffect(() => {
+  if (!authUser) return;
+
+  const newSocket = io(backendUrl, {
+    query: {
+      userId: authUser._id,
+    },
+  });
+
+  setSocket(newSocket);
+
+  newSocket.on("connect", () => {
+    console.log("Socket connected:", newSocket.id);
+  });
+
+  newSocket.on("getOnlineUsers", (userIds) => {
+    console.log("Online users:", userIds);
+    setOnlineUsers(userIds);
+  });
+
+  newSocket.on("disconnect", () => {
+    console.log("Socket disconnected");
+  });
+
+  return () => {
+    console.log("Cleaning socket:", newSocket.id);
+
+    newSocket.disconnect();
+    setSocket(null);
+    setOnlineUsers([]);
+  };
+}, [authUser]);
 
   // ================= CONTEXT =================
 
