@@ -6,6 +6,14 @@ import Sidebar from "../components/Sidebar";
 
 import ChatContext from "../../context/ChatContext";
 
+import { useContext } from "react";
+
+import ChatContainer from "../components/ChatContainer";
+import RightSidebar from "../components/RightSidebar";
+import Sidebar from "../components/Sidebar";
+
+import ChatContext from "../../context/ChatContext";
+
 const HomePage = () => {
   const { selectedUser } = useContext(ChatContext);
 
@@ -16,15 +24,15 @@ const HomePage = () => {
         h-screen
         text-white
         bg-[#020b1c]
-        bg-cover
-        bg-center
+        relative
+        overflow-hidden
+        flex
+        items-center
+        justify-center
+        px-0
         sm:px-[4%]
         lg:px-[8%]
         xl:px-[12%]
-        sm:py-[3%]
-        lg:py-[4%]
-        relative
-        overflow-hidden
       "
     >
       {/* Background blue glow */}
@@ -42,6 +50,7 @@ const HomePage = () => {
         "
       />
 
+      {/* Background blue glow */}
       <div
         className="
           absolute
@@ -63,6 +72,8 @@ const HomePage = () => {
           z-10
           w-full
           h-full
+          sm:h-[94vh]
+          lg:h-[92vh]
           overflow-hidden
           rounded-2xl
           border
